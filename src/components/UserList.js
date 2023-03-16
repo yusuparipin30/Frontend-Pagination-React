@@ -2,12 +2,13 @@ import React, {useState, useEffect} from "react";
 import axios from "axios";
 //7.untuk membuat paginate
 import ReactPaginate from "react-paginate";
+import { Link } from "react-router-dom";
 
 const UserList = () => {
     //1.mrmbuat state baru
     const [users, setUsers] = useState([]);
     const [page, setPage] = useState(0);
-    const [limit, setLimit] = useState(5);
+    const [limit, setLimit] = useState(6);
     const [pages, setPages] = useState(0);
     const [rows, setRows] = useState(0);
     const [keyword, setKeyword] = useState("");
@@ -35,7 +36,7 @@ const UserList = () => {
     const changePage = ({selected}) => {
         setPage(selected);
         //15. 
-        if(selected === 2){
+        if(selected === 5){
             setMsg("Jika tidak menemukan data yang anda cari,silakan cari data dengan kata kunci yang lebih spesifik di pencarian");
         } else {
             setMsg("");
@@ -49,10 +50,24 @@ const UserList = () => {
         setKeyword(query);
     };
 
+    //.untuk delete
+    const deleteUser = async (id) => {
+        try {
+          await axios.delete(`http://localhost:5000/users/${id}`);
+          getUsers();
+        } catch (error) {
+          console.log(error);
+        }
+      };
+     
+
+    
+
     return(
         <div className="container mt-5">
             <div className="columns">
                 <div className="column is-centered">
+                <Link to={`add`} className="button is-info mb-2">Add New</Link>
                     {/*10.search data*/}
                     <form onSubmit={searchData}>
                         <div className="field has-addons">
@@ -73,20 +88,44 @@ const UserList = () => {
                     <table className="table is-striped is-bordered is-fullwidth mt-2">
                         <thead>
                             <tr>
-                                <th>ID</th>
-                                <th>Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
+                                <th>No</th>
+                                <th>Nama</th>
+                                <th>Almt Dom</th>
+                                <th>Kamar</th>
+                                <th>Jmlh org</th>
+                                <th>Sts Kawin</th>
+                                <th>J.klmin</th>
+                                <th>Sts Tinggal</th>
+                                <th>Ktgri Org</th>
+                                <th>Almt Asal</th>
+                                <th>Agama</th>
+                                <th>No Hp</th>
+                                <th>Sts Rumah</th>
+                                <th>Nama Pemlik</th>
                             </tr>
                         </thead>
                         <tbody>
                             {/*5. looping untuk menampilkan data*/}
-                            {users.map((user) => (
+                            {users.map((user,index) => (
                                  <tr key={user.id}>
-                                 <td>{user.id}</td>
-                                 <td>{user.name}</td>
-                                 <td>{user.email}</td>
-                                 <td>{user.gender}</td>
+                                 <td>{index + 1}</td>
+                                 <td>{user.nama}</td>
+                                 <td>{user.alamat_domisili}</td>
+                                 <td>{user.kamar}</td>
+                                 <td>{user.jumlah_orang}</td>
+                                 <td>{user.status_perkawinan}</td>
+                                 <td>{user.jenis_kelamin}</td>
+                                 <td>{user.status_tinggal}</td>
+                                 <td>{user.kategori_orang}</td>
+                                 <td>{user.alamat_asal}</td>
+                                 <td>{user.agama}</td>
+                                 <td>{user.no_hp}</td>
+                                 <td>{user.kepemilikan}</td>
+                                 <td>{user.nama_pemilik}</td>
+                                 <td>
+                                    <Link to={`edit/${user.id}`} className="button is-small is-info mr-2">Edit</Link>
+                                    <button onClick={() => deleteUser(user.id)} className="button is-small is-danger">Delete</button>
+                                 </td>
                              </tr>
                             ))}
                         </tbody>
@@ -106,7 +145,7 @@ const UserList = () => {
                         <ReactPaginate
                          previousLabel={"< Prev"}
                          nextLabel={"Next >"}
-                         pageCount={Math.min(3,pages)}
+                         pageCount={Math.min(6,pages)}
                          onPageChange={changePage}
                          containerClassName={"pagination-list"}
                          pageLinkClassName={"pagination-link"}
