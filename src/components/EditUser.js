@@ -12,7 +12,7 @@ const EditUser = () => {
     const [kamar, setKamar] = useState("Bawah");
     const [jumlah_orang, setJumlahOrang] = useState("");
     const [status_perkawinan, setStatusPerkawinan] = useState("Menikah");
-    const [jenis_kelamin, setJenisKelamin] = useState("Perempuan");
+    const [jenis_kelamin, setJenisKelamin] = useState("Cewe");
     const [status_tinggal, setStatusTinggal] = useState("Aktif");
     const [kategori_orang, setKategoriOrang] = useState("Dewasa");
     const [alamat_asal, setAlamatAsal] = useState("");
@@ -71,7 +71,7 @@ const EditUser = () => {
     }
 
     return (
-        <div className="columns mt-5 is-centered">
+        <div className="columns mt-5 is-centered is-mobile">
             <div className="column is-half">
                 <form onSubmit={updateUser}>
                     <div className="field">
@@ -127,8 +127,8 @@ const EditUser = () => {
                         <div className="control">
                            <div className="select is-fullwidth">
                                 <select value={jenis_kelamin} onChange={(e) => setJenisKelamin(e.target.value)}>
-                                    <option value="Laki-Laki">Laki-Laki</option>
-                                    <option value="Perempuan">Perempuan</option>
+                                    <option value="Laki">Laki</option>
+                                    <option value="Cewe">Cewe</option>
                                 </select>
                            </div>
                         </div>

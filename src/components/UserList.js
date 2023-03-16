@@ -85,7 +85,8 @@ const UserList = () => {
                             </div>
                         </div>
                     </form>
-                    <table className="table is-striped is-bordered is-fullwidth mt-2">
+                    <div className="table-container">
+                    <table className="table is-striped is-bordered is-fullwidth mt-2 has-text-centered is-capitalized is-size-7">
                         <thead>
                             <tr>
                                 <th>No</th>
@@ -95,13 +96,14 @@ const UserList = () => {
                                 <th>Jmlh org</th>
                                 <th>Sts Kawin</th>
                                 <th>J.klmin</th>
-                                <th>Sts Tinggal</th>
+                                <th>Sts Tinggl</th>
                                 <th>Ktgri Org</th>
                                 <th>Almt Asal</th>
                                 <th>Agama</th>
                                 <th>No Hp</th>
                                 <th>Sts Rumah</th>
-                                <th>Nama Pemlik</th>
+                                <th>Nama Pmlik</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -130,6 +132,7 @@ const UserList = () => {
                             ))}
                         </tbody>
                     </table>
+                    </div>
                     {/*6.menampilka total rows, rows di ambil dari statenya, dan juga pagenya*/}
                     {/*page di mulai dr 1 dan total pages nya ngambil dari state pages nya*/}
                     {/*rows? artinya jika tidak ada rows maka akan render page+1 dan jika tidak ada data maka render 0*/}
